@@ -11,5 +11,17 @@ func init() {
 }
 
 func main() {
-	initializers.DB.AutoMigrate(&model.Address{}, &model.Order{}, &model.OrderStatus{}, &model.Product{}, &model.ProductCategory{}, &model.ShippingMethod{}, &model.User{}, &model.UserPaymentMethod{}, &model.UserAddress{}, &model.ShoppingCart{}, &model.ShoppingCartItem{},)
+	initializers.DB.AutoMigrate(
+		&model.User{},
+		&model.Address{},
+		&model.OrderStatus{},
+		&model.ProductCategory{},
+		&model.Product{},
+		&model.ShippingMethod{},
+		&model.UserPaymentMethod{},
+		&model.UserAddress{},
+		&model.Order{},
+		&model.ShoppingCart{},
+		&model.ShoppingCartItem{},
+	)
 }
