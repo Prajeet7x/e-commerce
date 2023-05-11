@@ -1,30 +1,21 @@
 package initializers
 
 import (
-	"fmt"
+	"log"
 	"os"
 
-	"gorm.io/driver/mysql"
+	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
 var DB *gorm.DB
 
-func InitializeDatabase() *gorm.DB {
-	DB = connectDB()
-	return DB
-}
-
-func connectDB() *gorm.DB {
+func ConnectToDataBase() {
 	var err error
-	dsn := os.Getenv("DB_USERNAME") + ":" + os.Getenv("DB_PASSWORD") + "@tcp" + "(" + os.Getenv("DB_HOST") + ":" + os.Getenv("DB_PORT") + ")/" + os.Getenv("DB_NAME") + "?" + "parseTime=true&loc=Local"
-	fmt.Println("dsn : ", dsn)
-	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
+	dsn := os.Getenv("DSN")
+	DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
 
 	if err != nil {
-		fmt.Printf("Error connecting to database : error=%v", err)
-		return nil
+		log.Fatal("Error connecting to database")
 	}
-
-	return db
 }
