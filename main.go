@@ -1,8 +1,15 @@
 package main
 
 import (
+	"ecommerce/initializers"
+
 	"github.com/gin-gonic/gin"
 )
+
+func init() {
+	initializers.LoadEnvVariables()
+	initializers.ConnectToDataBase()
+}
 
 func main() {
 	r := gin.Default()
